@@ -5,7 +5,7 @@ subtitle: A little bit about me and this blog.
 permalink: /about/
 ---
 
-Hey there! I'm **{{ site.author }}** — a developer, writer, and lifelong learner.
+Hey there! I'm **{{ site.author.name }}** — a developer, writer, and lifelong learner.
 
 This blog is where I share things I'm working on, thinking about, or just find worth writing down. Topics range from software engineering and side projects to broader ideas I'm exploring.
 
