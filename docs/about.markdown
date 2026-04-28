@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: single
 title: About
 subtitle: A little bit about me and this blog.
 permalink: /about/

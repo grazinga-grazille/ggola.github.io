@@ -1,24 +1,31 @@
 # ── Site Settings ──────────────────────────────────────────────────────────────
 title: My Blog
-author: Gatik Gola
-email: gola.gatik@gmail.com
 description: >-
   A personal blog about code, ideas, and things I find interesting.
-baseurl: "/ggola.github.io"   # subpath for project pages
-url: "https://grazinga-grazille.github.io/ggola.github.io/"       # e.g. https://yourdomain.com
+baseurl: "/ggola.github.io"
+url: "https://grazinga-grazille.github.io"
 
-# ── Social ─────────────────────────────────────────────────────────────────────
-github_username:  grazinga-grazille
-linkedin_username:  gatik-gola
+# ── Author ──────────────────────────────────────────────────────────────────────
+author:
+  name: "Gatik Gola"
+  email: "gola.gatik@gmail.com"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/grazinga-grazille"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/gatik-gola"
 
-# ── Build ──────────────────────────────────────────────────────────────────────
-theme: minima
+# ── Theme ───────────────────────────────────────────────────────────────────────
+remote_theme: mmistakes/minimal-mistakes
+minimal_mistakes_skin: "default"
+
+# ── Plugins ─────────────────────────────────────────────────────────────────────
 plugins:
   - jekyll-feed
-
-# ── Pagination (optional — requires jekyll-paginate gem) ───────────────────────
-# paginate: 6
-# paginate_path: "/page:num/"
+  - jekyll-remote-theme
+  - jekyll-include-cache
 
 # ── Defaults ───────────────────────────────────────────────────────────────────
 defaults:
@@ -26,12 +33,16 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: post
+      layout: single
+      author_profile: true
+      read_time: true
+      show_date: true
   - scope:
       path: ""
       type: pages
     values:
-      layout: page
+      layout: single
+      author_profile: true
 
 # ── Exclude ────────────────────────────────────────────────────────────────────
 exclude:
