@@ -19,6 +19,6 @@ This blog is where I share things I'm working on, thinking about, or just find w
 
 Have a question, idea, or just want to say hi?
 
-- **Email:** [{{ site.email }}](mailto:{{ site.email }})
+- **Email:** [{{ site.author.email }}](mailto:{{ site.author.email }})
 {% if site.twitter_username %}- **Twitter:** [@{{ site.twitter_username }}](https://twitter.com/{{ site.twitter_username }}){% endif %}
 {% if site.github_username %}- **GitHub:** [{{ site.github_username }}](https://github.com/{{ site.github_username }}){% endif %}
