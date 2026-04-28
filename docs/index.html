@@ -1,0 +1,198 @@
+---
+layout: default
+title: Home
+---
+
+<main class="home-main">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Hi, I'm <span class="highlight">{{ site.author | default: "Your Name" }}</span></h1>
+      <p class="hero-subtitle">Developer · Writer · Creator</p>
+      <p class="hero-description">
+        Welcome to my blog — where I write about code, ideas, and things I find interesting.
+      </p>
+      <a href="{{ "/about" | relative_url }}" class="btn">About Me</a>
+    </div>
+  </section>
+
+  <!-- Posts Section -->
+  <section class="posts-section">
+    <h2 class="section-title">Latest Posts</h2>
+
+    {% if site.posts.size > 0 %}
+      <div class="posts-grid">
+        {% for post in site.posts limit:6 %}
+          <article class="post-card">
+            <div class="post-meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%B %d, %Y" }}
+              </time>
+              {% if post.categories.size > 0 %}
+                <span class="post-category">{{ post.categories | first }}</span>
+              {% endif %}
+            </div>
+            <h3 class="post-title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h3>
+            <p class="post-excerpt">
+              {{ post.excerpt | strip_html | truncatewords: 25 }}
+            </p>
+            <a href="{{ post.url | relative_url }}" class="read-more">Read more &rarr;</a>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="no-posts">No posts yet. Check back soon!</p>
+    {% endif %}
+  </section>
+
+</main>
+
+<style>
+  /* Reset & Base */
+  .home-main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 3rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: #111827;
+  }
+
+  .highlight {
+    color: #4f46e5;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: #6b7280;
+    margin: 0 0 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    color: #374151;
+    max-width: 480px;
+    line-height: 1.7;
+    margin: 0 0 1.5rem;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #4f46e5;
+    color: #fff;
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+  }
+
+  .btn:hover {
+    background: #4338ca;
+  }
+
+  /* Posts Section */
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 2rem;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .post-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-bottom: 0.6rem;
+  }
+
+  .post-category {
+    background: #ede9fe;
+    color: #6d28d9;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .post-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+  }
+
+  .post-title a {
+    color: #111827;
+    text-decoration: none;
+  }
+
+  .post-title a:hover {
+    color: #4f46e5;
+  }
+
+  .post-excerpt {
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+  }
+
+  .read-more {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4f46e5;
+    text-decoration: none;
+  }
+
+  .read-more:hover {
+    text-decoration: underline;
+  }
+
+  .no-posts {
+    color: #9ca3af;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 1.8rem; }
+    .posts-grid { grid-template-columns: 1fr; }
+  }
+</style>
