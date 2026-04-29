@@ -84,4 +84,4 @@ Net cost is always positive — the model is evaluated by how much it reduces to
 
 ## Try It
 
-The full Streamlit app with live predictions, model performance metrics, and business analysis is available in the [GitHub repo](https://github.com/grazinga-grazille/surgery-duration-predictor).
+The full Streamlit app with live predictions, model performance metrics, and business analysis is available at [surgery-duration-predictor.streamlit.app](https://surgery-duration-predictor.streamlit.app/).
