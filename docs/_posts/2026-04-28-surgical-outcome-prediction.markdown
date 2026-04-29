@@ -1,58 +1,87 @@
 ---
-layout: post
-title: "Surgical Outcome Prediction with Machine Learning"
-date: 2026-04-28 12:00:00 -0400
-categories: [machine-learning, healthcare]
-description: Using pre-operative patient data to predict surgical outcomes — approach, challenges, and results.
+layout: single
+title: "Surgery Duration Predictor: Reducing OR Scheduling Costs with ML"
+date: 2026-04-28
+categories: machine-learning healthcare
+tags: [random-forest, nlp, tfidf, svd, healthcare, operations-research]
+author_profile: true
+read_time: true
+show_date: true
+excerpt: "A Random Forest model trained on ~35,000 surgical cases from a Canadian teaching hospital that outperforms surgeon-reported booked durations — saving $363,898 in OR scheduling costs and creating capacity for 176 additional procedures."
 ---
 
-Predicting surgical outcomes before a procedure begins is one of the more meaningful problems machine learning can tackle in healthcare. This post walks through the work, the decisions made, and what I learned.
+## Overview
+
+**Surgery Duration Predictor** is a machine learning application developed as part of research conducted in the Department of Management Sciences at the **University of Waterloo**.
+
+Inaccurate surgery time estimates lead to OR scheduling inefficiencies, patient wait times, and unnecessary costs. Most hospitals rely on surgeon-reported booked durations or historical averages — which are often systematically biased. This project replaces that with a data-driven prediction model.
+
+---
 
 ## The Problem
 
-Surgeons and care teams need tools to assess patient risk pre-operatively — not to replace clinical judgment, but to augment it. The goal here was to build a model that, given a set of patient features collected before surgery, estimates the likelihood of a complication or adverse outcome.
+Operating room time is one of the most expensive and constrained resources in a hospital. When a surgery runs over its booked slot, it creates overtime costs and cascading delays. When it finishes early, that recovered time is often wasted because the next case isn't ready.
 
-## Data
+The root cause: **booked durations are inaccurate**. Surgeons estimate optimistically, and static historical averages ignore case-specific context.
 
-The dataset included pre-operative features such as:
-
-- Patient demographics (age, BMI)
-- Comorbidities (diabetes, hypertension, etc.)
-- Lab values (hemoglobin, creatinine, etc.)
-- Procedure type and surgical complexity
-
-Before modeling, significant time went into cleaning and preprocessing — handling missing values, encoding categoricals, and addressing class imbalance in the outcome labels.
+---
 
 ## Approach
 
-I tested several classification algorithms:
+A **Random Forest regression** model was trained on ~35,000 historical surgical cases from a Canadian teaching hospital.
 
-- **Logistic Regression** — baseline, interpretable
-- **Random Forest** — handles non-linearity, robust to outliers
-- **Gradient Boosting (XGBoost)** — best overall performance
+### Feature Engineering
 
-Feature importance from the tree-based models revealed that a handful of lab values and comorbidity combinations were the strongest predictors, which aligns with clinical intuition.
+| Feature type | Details |
+|---|---|
+| Surgical priority | Numeric urgency score (1–5) |
+| Patient / room / specialty | One-hot encoded categorical features |
+| Procedure description | TF-IDF bigrams compressed to 150 SVD components |
 
-## Results
+### Target Variable
 
-| Model | AUC-ROC | Precision | Recall |
-|---|---|---|---|
-| Logistic Regression | 0.74 | 0.68 | 0.65 |
-| Random Forest | 0.81 | 0.74 | 0.71 |
-| XGBoost | **0.85** | **0.78** | **0.76** |
+Actual OR time in minutes, **log-transformed** during training to reduce right-skew. Predictions are exponentiated back to interpretable minutes.
 
-The XGBoost model achieved an AUC-ROC of **0.85**, which is a meaningful improvement over the logistic regression baseline and competitive with published results in similar domains.
+---
 
-## Challenges
+## Key Findings
 
-- **Class imbalance** — adverse outcomes are relatively rare. SMOTE and class-weight adjustments helped significantly.
-- **Missing data** — some lab values were missing for a large fraction of patients. Multiple imputation was used rather than simple mean-fill.
-- **Interpretability** — SHAP values were used to explain individual predictions, which is important for clinical trust.
+- The model **outperforms booked duration benchmarks** on test data (lower RMSE and MAE)
+- Most outlier cases are **under-predicted** — surgeries ran longer than expected
+- **Procedure description text** (SVD embeddings from TF-IDF bigrams) is the strongest predictor group — more signal than categorical features alone
 
-## What's Next
+---
 
-- Incorporate temporal features (trend in lab values leading up to surgery)
-- Explore calibration to ensure predicted probabilities are reliable
-- Validate on an external dataset
+## Business Impact
 
-The code and data pipeline are on [GitHub](https://github.com/{{ site.github_username }}).
+Applied to **7,804 surgeries across 12 specialties** (Mar 2024 – Mar 2025):
+
+> Replacing booked durations with model predictions reduced the net OR scheduling cost by **$363,898** — from $8.1M to $7.8M.
+
+Recovered schedule time creates capacity for **176 additional high-volume procedures** without extending OR hours.
+
+### Cost Model
+
+| Scenario | Rate |
+|---|---|
+| Surgery ran over (overtime) | $35 × 1.5 = **$52.50/min** |
+| Surgery ran under (opportunity cost) | **$35/min** |
+
+Net cost is always positive — the model is evaluated by how much it reduces total deviation from scheduled time.
+
+---
+
+## Results Summary
+
+| Metric | Model | Booked Duration |
+|---|---|---|
+| RMSE | Lower ✓ | Baseline |
+| MAE | Lower ✓ | Baseline |
+| Net scheduling cost | $7.8M | $8.1M |
+| Additional procedures possible | +176 | — |
+
+---
+
+## Try It
+
+The full Streamlit app with live predictions, model performance metrics, and business analysis is available in the [GitHub repo](https://github.com/grazinga-grazille/surgery-duration-predictor).
