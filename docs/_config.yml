@@ -9,13 +9,17 @@ url: "https://grazinga-grazille.github.io"
 author:
   name: "Gatik Gola"
   email: "gola.gatik@gmail.com"
+  bio: "Data Scientist & ML Engineer"
   links:
     - label: "GitHub"
-      icon: "fab fa-fw fa-github"
+      icon: "fas fa-fw fa-link"
       url: "https://github.com/grazinga-grazille"
     - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
+      icon: "fas fa-fw fa-link"
       url: "https://www.linkedin.com/in/gatik-gola"
+    - label: "Publication"
+      icon: "fas fa-fw fa-link"
+      url: "https://doi.org/10.1002/mp.70179"
 
 # ── Theme ───────────────────────────────────────────────────────────────────────
 remote_theme: mmistakes/minimal-mistakes

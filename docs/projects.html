@@ -30,6 +30,57 @@ author_profile: true
   <a href="https://github.com/grazinga-grazille/surgery-duration-predictor" target="_blank" class="btn btn--inverse">GitHub</a>
 </div>
 
+<div class="project-card">
+  <h2><a href="https://github.com/grazinga-grazille/forecasting-rental-bike-count" target="_blank">Forecasting Rental Bike Count</a></h2>
+  <p class="project-meta">Machine Learning · Time Series · Kedro Pipeline</p>
+
+  <p>
+    A production-ready ML pipeline that predicts next-hour rental bike demand using CatBoost, lag features, and a live Plotly Dash dashboard.
+    Built with Kedro for modular, reproducible workflows and containerised with Docker.
+  </p>
+
+  <h3>Highlights</h3>
+  <ul>
+    <li>Chronological 80/20 train-test split with no data leakage</li>
+    <li>Lag features up to 23 hours to capture same-time-yesterday demand patterns</li>
+    <li>Live inference simulation replaying historical data in real time</li>
+    <li>Supports CatBoost, Random Forest, and Linear Regression — switchable via config</li>
+  </ul>
+
+  <h3>Stack</h3>
+  <p>Python · Kedro · CatBoost · scikit-learn · Plotly Dash · Docker · uv · ruff</p>
+
+  <a href="/ggola.github.io/machine-learning/time-series/2026/04/29/forecasting-rental-bike-count.html" class="btn btn--primary">Read Post</a>
+  &nbsp;
+  <a href="http://67.205.148.207:8050" target="_blank" class="btn btn--inverse">Live Demo</a>
+  &nbsp;
+  <a href="https://github.com/grazinga-grazille/forecasting-rental-bike-count" target="_blank" class="btn btn--inverse">GitHub</a>
+</div>
+
+<div class="project-card">
+  <h2><a href="https://github.com/grazinga-grazille/flight-delay-prediction" target="_blank">Flight Delay Prediction</a></h2>
+  <p class="project-meta">Machine Learning · Classification · Imbalanced Data</p>
+
+  <p>
+    A binary classification model predicting severe carrier delays (60+ min) across 484,551 flights.
+    Tackles heavy class imbalance (7.7% positive rate) using XGBoost with resampling strategies including RandomOverSampler, RandomUnderSampler, and ADASYN.
+  </p>
+
+  <h3>Highlights</h3>
+  <ul>
+    <li>484K flights, 4,073 features after one-hot encoding</li>
+    <li>Demonstrates why accuracy is misleading for imbalanced problems (92.3% accuracy, near-zero F1 at baseline)</li>
+    <li>Experiments with three resampling strategies to improve minority class recall</li>
+  </ul>
+
+  <h3>Stack</h3>
+  <p>Python · XGBoost · scikit-learn · imbalanced-learn · pandas</p>
+
+  <a href="/ggola.github.io/machine-learning/classification/2026/05/03/flight-delay-prediction.html" class="btn btn--primary">Read Post</a>
+  &nbsp;
+  <a href="https://github.com/grazinga-grazille/flight-delay-prediction" target="_blank" class="btn btn--inverse">GitHub</a>
+</div>
+
 <style>
   .project-card {
     border: 1px solid #e0e0e0;
